@@ -1,14 +1,26 @@
+/**
+ *Copyright:
+ *This code is free software; you can redistribute it and/or modify
+ *it under the terms of the GPL-3.0
+ *
+ * @author zhangjian
+ * @date 2018.04
+ *
+ */
+
+///////////////////////////////////////////////////////////////////////
+
 #include "Geometry.h"
 #include <cmath>
 #include <limits>
-//Õâ¸öÎÄ¼ş¶¨ÒåÇó½»µãµÄº¯Êı
+//è¿™ä¸ªæ–‡ä»¶å®šä¹‰æ±‚äº¤ç‚¹çš„å‡½æ•°
 
-//³£Á¿³õÊ¼»¯
+//å¸¸é‡åˆå§‹åŒ–
 const double Vector2D::error=std::numeric_limits< double >::max();
 const Vector2D Vector2D::INVALIDATED( Vector2D::error, Vector2D::error );
 const double Line2D::ERROR = std::numeric_limits< double >::max();
 
-//ÄÚÁªĞ¡º¯Êı£ºÇóÆ½·½ºÍÒ»Ôª¶ş´Î·½³ÌµÄ½â
+//å†…è”å°å‡½æ•°ï¼šæ±‚å¹³æ–¹å’Œä¸€å…ƒäºŒæ¬¡æ–¹ç¨‹çš„è§£
 inline double SQUARE( const double & val )
 {
     return val * val;
@@ -37,7 +49,7 @@ inline int QUADRATIC_FOMULA( const double & a,const double & b,
     }
 }
 
-//ÓÃ¹«Ê½ÇóÁ½ÌõÖ±ÏßµÄ½»µã
+//ç”¨å…¬å¼æ±‚ä¸¤æ¡ç›´çº¿çš„äº¤ç‚¹
 Vector2D Line2D::intersection( const Line2D & line1,const Line2D & line2 )
 {
     double tmp = line1.M_a * line2.M_b - line1.M_b * line2.M_a;
@@ -49,7 +61,7 @@ Vector2D Line2D::intersection( const Line2D & line1,const Line2D & line2 )
                      (line2.M_a * line1.M_c - line1.M_a * line2.M_c) / tmp );
 }
 
-//·ÖÁ½ÖÖÇé¿öÓÃ¹«Ê½Çó½âÒ»Ôª¶ş´Î·½³Ì£¬½»µãÓÃ²ÎÊı´ø»Ø
+//åˆ†ä¸¤ç§æƒ…å†µç”¨å…¬å¼æ±‚è§£ä¸€å…ƒäºŒæ¬¡æ–¹ç¨‹ï¼Œäº¤ç‚¹ç”¨å‚æ•°å¸¦å›
 int Circle2D::intersection( const Line2D & line,Vector2D & sol1,Vector2D & sol2 ) const
 {
     if ( std::fabs( line.a() ) < 1.0e-6 )
@@ -109,7 +121,7 @@ int Circle2D::intersection( const Line2D & line,Vector2D & sol1,Vector2D & sol2 
 }
 
 
-//ÒÀ´ÎÇóÖ±ÏßÓëËÄÌõ±ß½çÏßµÄ½»µã
+//ä¾æ¬¡æ±‚ç›´çº¿ä¸å››æ¡è¾¹ç•Œçº¿çš„äº¤ç‚¹
 int Rect2D::intersection( const Line2D & line,
                 Vector2D & sol1,Vector2D & sol2 ) const
 {
