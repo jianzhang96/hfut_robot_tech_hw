@@ -1,3 +1,15 @@
+/**
+ *Copyright:
+ *This code is free software; you can redistribute it and/or modify
+ *it under the terms of the GPL-3.0
+ *
+ * @author zhangjian
+ * @data 2018.04
+ *
+ */
+
+///////////////////////////////////////////////////////////////////////
+
 #ifndef GEOMETRY_H
 #define GEOMETRY_H
 
