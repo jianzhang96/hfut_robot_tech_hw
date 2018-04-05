@@ -1,3 +1,15 @@
+/**
+ *Copyright:
+ *This code is free software; you can redistribute it and/or modify
+ *it under the terms of the GPL-3.0
+ *
+ * @author zhangjian
+ * @data 2018.04
+ *
+ */
+
+///////////////////////////////////////////////////////////////////////
+
 #include "Geometry.h"
 
 int main()
@@ -10,11 +22,11 @@ int main()
     Circle2D circle(point1,2.0);
     Rect2D rect(p3,p4);
 
-    cout<<"Á½ÌõÖ±Ïß½»µã£º"<<line1.intersection(line2);
-    cout<<"Ö±ÏßÓëÔ²µÄ½»µã¸öÊý£º"
+    cout<<"ä¸¤æ¡ç›´çº¿äº¤ç‚¹ï¼š"<<line1.intersection(line2);
+    cout<<"ç›´çº¿ä¸Žåœ†çš„äº¤ç‚¹ä¸ªæ•°ï¼š"
         <<circle.intersection(line1,p3,p4)<<endl;
     cout<<p3<<p4;
-    cout<<"¾ØÐÎÓëÖ±ÏßµÄ½»µã¸öÊý£º"
+    cout<<"çŸ©å½¢ä¸Žç›´çº¿çš„äº¤ç‚¹ä¸ªæ•°ï¼š"
         <<rect.intersection(line1,p3,p4)<<endl;
     cout<<p3<<p4;
 
