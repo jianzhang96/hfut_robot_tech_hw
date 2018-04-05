@@ -1,7 +1,18 @@
+/**
+ *Copyright:
+ *This code is free software; you can redistribute it and/or modify
+ *it under the terms of the GPL-3.0
+ *
+ * @author zhangjian
+ * @data 2018.04
+ *
+ */
+
+
 #include <cstdio>
 #include <cstring>
 
-//³¡ÉÏ±ê¼Ç
+//åœºä¸Šæ ‡è®°
 char * flag[]={
     "f l t",
     "f t l 50","f t l 40","f t l 30","f t l 20","f t l 10","f t l 0",
@@ -70,18 +81,18 @@ char *oppo[]={
 };
 
 
-bool execute(char* strMsg);//ÌáÈ¡Ã¿Ò»ÌõĞÅÏ¢
-bool analyzeSeeMsg(char *strMsg);//´¦ÀíseeĞÅÏ¢
-bool analyzeHearMsg(char *strMsg);//´¦ÀíhearĞÅÏ¢
-bool everySeeMsg(char *strMsg,int type);//´¦ÀíseeĞÅÏ¢µÄÃ¿Ò»ÌõObjectInfo
-bool strinObjects(char *s,char ** v,int n);//ÅĞ¶Ï×Ö·û´®ÊÇ·ñÔÚ×Ö·û´®±íÄÚ
+bool execute(char* strMsg);//æå–æ¯ä¸€æ¡ä¿¡æ¯
+bool analyzeSeeMsg(char *strMsg);//å¤„ç†seeä¿¡æ¯
+bool analyzeHearMsg(char *strMsg);//å¤„ç†hearä¿¡æ¯
+bool everySeeMsg(char *strMsg,int type);//å¤„ç†seeä¿¡æ¯çš„æ¯ä¸€æ¡ObjectInfo
+bool strinObjects(char *s,char ** v,int n);//åˆ¤æ–­å­—ç¬¦ä¸²æ˜¯å¦åœ¨å­—ç¬¦ä¸²è¡¨å†…
 
 using namespace std;
 FILE *fp;
 
 int main()
 {
-    fp=fopen("./in.txt","r");//¶ÁÈ¡
+    fp=fopen("./in.txt","r");//è¯»å–
     char msg[1001];
     fgets(msg,1000,fp);
 
@@ -93,7 +104,7 @@ int main()
 
 bool execute(char* strMsg)
 {
-//ÌáÈ¡×Ö·û´®ÖĞµÄÃ¿Ò»ÌõĞÅÏ¢£¬È»ºó½øĞĞ½âÎö
+//æå–å­—ç¬¦ä¸²ä¸­çš„æ¯ä¸€æ¡ä¿¡æ¯ï¼Œç„¶åè¿›è¡Œè§£æ
     char *str=strMsg;
     char *pre=strMsg;
 
@@ -134,9 +145,9 @@ bool analyzeSeeMsg(char *strMsg)
     while(*p!=' ') p++;
     *p='\0';
 
-    printf("ÔÚ%sÖÜÆÚsee ",strMsg+5);
+    printf("åœ¨%så‘¨æœŸsee ",strMsg+5);
     fp=fopen("./out.txt","a");
-    fprintf(fp,"ÔÚ%sÖÜÆÚsee ",strMsg+5);
+    fprintf(fp,"åœ¨%så‘¨æœŸsee ",strMsg+5);
 
     *p=' ';
 
@@ -173,8 +184,8 @@ bool analyzeSeeMsg(char *strMsg)
     return true;
 }
 
-//1ÊÇflag,2ÊÇball,3ÊÇplayer
-//¶ÔÇòÔ±£¬±ê¼ÇºÍÇò¶ÔÏó½øĞĞ·ÖÇé¿ö½âÎö
+//1æ˜¯flag,2æ˜¯ball,3æ˜¯player
+//å¯¹çƒå‘˜ï¼Œæ ‡è®°å’Œçƒå¯¹è±¡è¿›è¡Œåˆ†æƒ…å†µè§£æ
 bool everySeeMsg(char *strMsg,int type)
 {
     fp=fopen("./out.txt","a");
@@ -195,25 +206,25 @@ bool everySeeMsg(char *strMsg,int type)
     if(type==1){
         direction[strlen(direction)-1]='\0';
     }
-     printf("%s ¾àÀëÎÒµÄ Distance ÊÇ %s£¬ DirectionÊÇ %s£»",
+     printf("%s è·ç¦»æˆ‘çš„ Distance æ˜¯ %sï¼Œ Directionæ˜¯ %sï¼›",
                 name,distance,direction);
-     fprintf(fp,"%s ¾àÀëÎÒµÄ Distance ÊÇ %s£¬ DirectionÊÇ %s£»",
+     fprintf(fp,"%s è·ç¦»æˆ‘çš„ Distance æ˜¯ %sï¼Œ Directionæ˜¯ %sï¼›",
             name,distance,direction);
     if(type==1) return true;
 
     char *distChng=strtok(NULL," ");
     char *DirChng=strtok(NULL," ");
     if(type==2) DirChng[strlen(DirChng)-1]='\0';
-    printf("\b,DistChngÊÇ%s£¬DirChngÊÇ%s£»",distChng,DirChng);
-    fprintf(fp,"\b£¬DistChngÊÇ%s£¬DirChngÊÇ%s£»",distChng,DirChng);
+    printf("\b,DistChngæ˜¯%sï¼ŒDirChngæ˜¯%sï¼›",distChng,DirChng);
+    fprintf(fp,"\bï¼ŒDistChngæ˜¯%sï¼ŒDirChngæ˜¯%sï¼›",distChng,DirChng);
     if(type==2) return true;
 
     char *bodyDir=strtok(NULL," ");
     char *hearDir=strtok(NULL," ");
     int l=strlen(hearDir);
     hearDir[l-1]='\0';
-    printf("\b,ËüµÄBodyDirÊÇ %sºÍHeadDir ÊÇ %s£»",bodyDir,hearDir);
-    fprintf(fp,"\b,ËüµÄBodyDirÊÇ %sºÍHeadDir ÊÇ %s£»",bodyDir,hearDir);
+    printf("\b,å®ƒçš„BodyDiræ˜¯ %så’ŒHeadDir æ˜¯ %sï¼›",bodyDir,hearDir);
+    fprintf(fp,"\b,å®ƒçš„BodyDiræ˜¯ %så’ŒHeadDir æ˜¯ %sï¼›",bodyDir,hearDir);
 
     return true;
 }
@@ -227,10 +238,10 @@ bool analyzeHearMsg(char *strMsg)
     sender=strtok(NULL,space);
     msg=strtok(NULL,")");
 
-    printf("ÔÚ%sÖÜÆÚ hear ´Ó%s·½Ïò Ìıµ½ÁË%s;\n",time,sender,msg);
+    printf("åœ¨%så‘¨æœŸ hear ä»%sæ–¹å‘ å¬åˆ°äº†%s;\n",time,sender,msg);
 
     fp=fopen("./out.txt","a");
-    fprintf(fp,"ÔÚ%sÖÜÆÚ hear ´Ó%s·½Ïò Ìıµ½ÁË%s;\n",time,sender,msg);
+    fprintf(fp,"åœ¨%så‘¨æœŸ hear ä»%sæ–¹å‘ å¬åˆ°äº†%s;\n",time,sender,msg);
 
     return true;
 }
