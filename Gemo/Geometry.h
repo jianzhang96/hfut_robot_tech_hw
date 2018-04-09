@@ -72,6 +72,14 @@ public:
     double x() const { return M_x;}
     double y() const { return M_y;}
 
+    double distance(const Vector2D& c) const
+    {
+
+        return sqrt((c.x()-this->x())*(c.x()-this->x())+
+                    ((c.y()-this->y())*(c.y()-this->y())));
+
+    }
+
     bool isValid() const
     {
       return ( ( M_x != error ) && ( M_y != error ) );
@@ -154,34 +162,71 @@ public:
 class Rect2D
 {
 private:
-    Vector2D top_left;      //两点确定一个矩形
+    //三个点确定一个矩形，如果构造只给两个参数，默认矩形是平行于X轴的
+    //给的两个点是左上和右下,处在对角线位置
+    Vector2D top_left;
     Vector2D bottom_right;
+    //另外两个点
+    Vector2D three;
+    Vector2D four;
 
 public:
-    Rect2D():top_left(0.0,0.0),bottom_right(0.0,0.0){}
+    Rect2D():top_left(0.0,0.0),bottom_right(0.0,0.0),
+             three(0.0,0.0),four(0.0,0.0){}
     Rect2D(Vector2D & c,Vector2D & d)
         :top_left(c.x(),c.y()),bottom_right(d.x(),d.y())
-        {}
+    {
+        three.assign(bottom_right.x(),top_left.y());
+        four.assign(top_left.x(),bottom_right.y());
+    }
+
+    Rect2D(Vector2D & a,Vector2D & b,Vector2D& c)
+        :top_left(a.x(),a.y()),bottom_right(b.x(),b.y())
+    {
+        Vector2D o((top_left.x()+bottom_right.x())/2,(top_left.y()+bottom_right.y())/2);
+        //判断三个点是否满足矩形条件：在圆周上
+        if(o.distance(top_left)!=o.distance(three))
+        {
+            cout<<"Parameter error. Use default."<<endl;
+            three.assign(bottom_right.x(),top_left.y());
+            four.assign(top_left.x(),bottom_right.y());
+        }
+        else{
+            three.assign(c.x(),c.y());
+            //求第四个点的坐标
+            Vector2D tmp1,tmp2;
+            Circle2D ci(o,o.distance(top_left));
+            Line2D l(three,o);
+            ci.intersection(l,tmp1,tmp2);
+            if(tmp1.x()==three.x()) {
+                four.assign(tmp2.x(),tmp2.y());
+            }
+            else {
+                four.assign(tmp1.x(),tmp1.y());
+            }
+        }
+
+    }
     //求四条边界
     Line2D leftEdge() const
     {
-        return Line2D(top_left,Vector2D(top_left.x(),bottom_right.y()));
+        return Line2D(top_left,four);
     }
 
 
     Line2D rightEdge() const
     {
-        return Line2D( Vector2D(bottom_right.x(),top_left.y()), bottom_right );
+        return Line2D(three, bottom_right );
     }
 
     Line2D topEdge() const
     {
-        return Line2D( top_left, Vector2D(bottom_right.x(),top_left.y()) );
+        return Line2D( top_left, three );
     }
 
     Line2D bottomEdge() const
     {
-        return Line2D(Vector2D(top_left.x(),bottom_right.y()),bottom_right);
+        return Line2D(four,bottom_right);
     }
 
     int intersection( const Line2D & line,
