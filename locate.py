@@ -23,28 +23,28 @@ def calDist(a,b):
     y_s=(a[1]-b[1])**2
     return (x_s+y_s)**0.5
     
-info='(C 16 0) (P6 16 180)'
+info='(P8 22 0) (P7 15 30)'
 
 inl=info.split()
 
-f_r=int(inl[1])
-g_r=int(inl[4])
-f_a=int(inl[2].strip(')'))
-g_a=int(inl[5].strip(')'))
+f_r=float(inl[1])
+g_r=float(inl[4])
+f_a=float(inl[2].strip(')'))
+g_a=float(inl[5].strip(')'))
 f_c=getAbsCoor(inl[0].strip('('))
 g_c=getAbsCoor(inl[3].strip('('))
 
 d=calDist(f_c,g_c)
 a=(f_r**2-g_r**2+d**2)/(2*d)
 h=(f_r**2-a**2)**0.5
-cos=abs((f_c[0]-g_c[0])/d)
-sin=abs((f_c[1]-g_c[1])/d)
-sign=1 if g_a-f_a>0 else -1
+cos=(g_c[0]-f_c[0])/d
+sin=(g_c[1]-f_c[1])/d
+sign=-1 if g_a-f_a>0 else 1
 
 p_x_=f_c[0]+a*cos
 p_y_=f_c[1]+a*sin
 
-p_x=p_x_-h*sign*sin
+p_x=p_x_+h*sign*sin
 p_y=p_y_-h*sign*cos
 ans=(p_x,p_y)
 
