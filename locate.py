@@ -50,7 +50,3 @@ ans=(p_x,p_y)
 
 print('2个标记:',info)
 print('全局坐标:',ans)
-
-
-
-
