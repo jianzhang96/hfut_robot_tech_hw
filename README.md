@@ -11,3 +11,6 @@ Gemeotry.h里面声明了四个类，一些定义也直接写在里面了，Geme
 
 ### 第三次：locate.py
 用python写的，求解的方法见教材106页。
+
+### 第四次：Tree
+先将数据整理成数据集data.txt，决策树的代码来自《机器学习实战》。trees.py求解决策树treePlotter.py根据树画出图形。sol.py调用这两个模块求解。

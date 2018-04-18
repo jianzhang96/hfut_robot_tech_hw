@@ -1,0 +1,12 @@
+1	1	3	French	Someone	0-10	yes
+1	1	1	Chinese	Full	30-60	no
+0	0	1	Fast	Someone	0-10	yes
+1	1	1	Chinese	Full	10-30	yes
+1	0	3	French	Full	>60	no
+0 	1	2	Italian	Someone	0-10	yes
+0	0	1	Fast	Nobody	0-10	no
+0	1	2	Chinese	Someone	0-10	yes
+0	0	1	Fast	Full	>60	no
+1	1	3	Italian	Full	10-30	no
+1	0	1	Fast	Nobody	0-10	no
+0	1	1	Fast	Full	30-60	yes
