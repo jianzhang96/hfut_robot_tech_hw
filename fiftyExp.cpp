@@ -131,8 +131,14 @@ else soc=dribble(0,DRIBBLE_WITHBALL);
 
 //(14) 在 playOn 模式下,拿到球后,如果我是 4 号,则传球给 7 号;
 //否则的话,传球给最近的队友;到对方禁区后以最大速度射向空隙大的球门一侧。
+//baofu上课说了这一题，判断夹角而不是守门员的位置，改一下。
 if(WM->isInTheirPenaltyArea(WM->getBallPos())) {
-  if(WM->getGlobalPosition(WM->getOppGoalieType()).getY()<=0)
+  posGoalie=WM->getGlobalPosition(WM->getOppGoalieType());
+  ang_goalie=(posGoalie-posAgent).getDirection();
+  angup=(VecPosition(52.5,6.0)-posAgent).getDirection();
+  angdown=(VecPosition(52.5,-6.0)-posAgent).getDirection();
+	
+  if(std::fabs(angup-ang_goalie)>std::fabs(angdown-ang_goalie))
     soc=kickTo(VecPosition(52.5,6.0),SS->getBallSpeedMax());
   else 
     soc=kickTo(VecPosition(52.5,-6.0),SS->getBallSpeedMax());
